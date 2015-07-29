@@ -125,7 +125,7 @@ typedef NS_ENUM(int, GCDWebServerLoggingLevel) {
 extern GCDWebServerLoggingLevel GCDWebServerLogLevel;
 extern void GCDWebServerLogMessage(GCDWebServerLoggingLevel level, NSString* format, ...) NS_FORMAT_FUNCTION(2, 3);
 
-#if DEBUG
+#if DEBUG_GWS
 #define GWS_LOG_DEBUG(...) do { if (GCDWebServerLogLevel <= kGCDWebServerLoggingLevel_Debug) GCDWebServerLogMessage(kGCDWebServerLoggingLevel_Debug, __VA_ARGS__); } while (0)
 #else
 #define GWS_LOG_DEBUG(...)
@@ -144,7 +144,7 @@ extern void GCDWebServerLogMessage(GCDWebServerLoggingLevel level, NSString* for
 
 #if !defined(GWS_DCHECK) || !defined(GWS_DNOT_REACHED)
 
-#if DEBUG
+#if DEBUG_GWS
 
 #define GWS_DCHECK(__CONDITION__) \
   do { \

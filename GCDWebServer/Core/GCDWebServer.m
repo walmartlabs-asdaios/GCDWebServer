@@ -67,13 +67,13 @@ NSString* const GCDWebServerAuthenticationMethod_Basic = @"Basic";
 NSString* const GCDWebServerAuthenticationMethod_DigestAccess = @"DigestAccess";
 
 #if defined(__GCDWEBSERVER_LOGGING_FACILITY_BUILTIN__)
-#if DEBUG
+#if DEBUG_GWS
 GCDWebServerLoggingLevel GCDWebServerLogLevel = kGCDWebServerLoggingLevel_Debug;
 #else
 GCDWebServerLoggingLevel GCDWebServerLogLevel = kGCDWebServerLoggingLevel_Info;
 #endif
 #elif defined(__GCDWEBSERVER_LOGGING_FACILITY_COCOALUMBERJACK__)
-#if DEBUG
+#if DEBUG_GWS
 DDLogLevel GCDWebServerLogLevel = DDLogLevelDebug;
 #else
 DDLogLevel GCDWebServerLogLevel = DDLogLevelInfo;
@@ -1168,7 +1168,7 @@ static void _LogResult(NSString* format, ...) {
                         _LogResult(@"  Bodies not matching:\n    Expected: %lu bytes\n      Actual: %lu bytes", (unsigned long)expectedBody.length, (unsigned long)actualBody.length);
                         success = NO;
 #if !TARGET_OS_IPHONE
-#if DEBUG
+#if DEBUG_GWS
                         if (GCDWebServerIsTextContentType([expectedHeaders objectForKey:@"Content-Type"])) {
                           NSString* expectedPath = [NSTemporaryDirectory() stringByAppendingPathComponent:[[[NSProcessInfo processInfo] globallyUniqueString] stringByAppendingPathExtension:@"txt"]];
                           NSString* actualPath = [NSTemporaryDirectory() stringByAppendingPathComponent:[[[NSProcessInfo processInfo] globallyUniqueString] stringByAppendingPathExtension:@"txt"]];
